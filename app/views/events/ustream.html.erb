@@ -6,6 +6,7 @@
             </h3>
         </div>
         <div class="panel-body">
+          <% if @coming_event.present? %>
             <h3 style="text-align: center">
               <%= @coming_event.name %>
             </h3>
@@ -25,7 +26,11 @@
                                               src: "https://www.youtube.com/embed/#{@coming_event.movie_url}?showinfo=0&rel=0",
                                               allowfullscreen: true ) %>
                                <%= content_tag(:div, iframe, class: 'youtube-container') %>
+            
             </div>
+          <% else %>
+          <div style="text-align: center">予定されているイベントはありません。</div>
+          <% end %>
         </div>
     </div>
 </div>

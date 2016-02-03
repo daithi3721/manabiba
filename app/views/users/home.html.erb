@@ -49,7 +49,11 @@
     <div class="panel panel-default">
 	  <div class="panel-body">
 	    <h3 style="text-align: center">coming soon・・・</h3>
-	    <%= link_to image_tag(@coming_event.event_image.url, :size => '715x290'), @coming_event %>
+	    <% if @coming_event.present? %>
+	      <%= link_to image_tag(@coming_event.event_image.url, :size => '715x290'), @coming_event %>
+	    <% else %>
+	     <div style="text-align: center">予定しているイベントはありません。</div>
+	    <% end %>
 	  </div>
     </div>
   </div>
