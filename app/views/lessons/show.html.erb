@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h3 style="text-align: center">
+                <%= @lesson.name %>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <h3 style="text-align: center">
+              <%= @lesson.description %>
+            </h3><br>
+            <ul class="list-inline" style="text-align: center">
+              <li>公開日: <%= @lesson.created_at.strftime('%Y/%m/%d') %></li>
+              <li>
+                <div class="favorite_form_container_<%= @lesson.id %>">
+                  <% if current_user.favoriting?(@lesson) %>
+                    <%= render 'users/unfavorite', lesson: @lesson %>
+                  <% else %>
+                    <%= render 'users/favorite', lesson: @lesson %>
+                  <% end %>
+                </div>
+              </li>
+              <li><i class="glyphicon glyphicon-user"></i><%= @lesson.teacher %></li>
+            </ul>
+            <div class='youtube-container' style="text-align: center">
+                       <% iframe = content_tag(
+                                      :iframe,
+                                      '', # empty body
+                                      width: 960,
+                                      height: 600,
+                                      src: "https://www.youtube.com/embed/#{@lesson.movie_url}?showinfo=0&rel=0",
+                                      allowfullscreen: true ) %>
+                       <%= content_tag(:div, iframe, class: 'youtube-container') %>
+            </div>
+             <% if current_user.admin? %>
+                <%= link_to '解説授業編集', edit_lesson_path(@lesson), class: 'btn btn-primary' %>
+                <%= link_to '解説授業削除', lesson_path(@lesson), class: 'btn btn-primary', method: :delete, data: { confirm: '本当に削除しますか？'} %>
+            <% end %>
+        </div>
+    </div>
+</div>

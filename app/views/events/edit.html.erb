@@ -1,0 +1,57 @@
+<% now = Time.zone.now %>
+
+<div class="page-header">
+    <h1>イベント編集</h1>
+</div>
+<div class="row">
+ <div class="col-md-6 col-md-offset-3">
+  <%= form_for(@event, class: 'form-horizontal', role: 'form') do |f| %>
+    <% if @event.errors.any? %>
+      <div class="alert alert-danger">
+          <ul>
+          <%= @event.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+      </div>
+    <% end %>
+    
+    <%= f.label :name, "イベント名" %>
+    <%= f.text_field :name, class: 'form-control' %>
+    
+    <% if @event.event_image? %>
+      <div class="thumbnail">
+        <%= image_tag @event.event_image.url %>
+      </div>
+    <% end %>
+    <%= f.file_field :event_image, class: 'form-control' %>
+    <%= f.hidden_field :event_image_cache %>
+  
+    <% if @event.event_image? %>
+      <div class="checkbox">
+          <label>
+              <%= f.check_box :remove_event_image %>
+              画像を削除する
+          </label>
+      </div>
+    <% end %>
+    
+    <%= f.label :content, "イベント説明" %>
+    <%= f.text_area :content, class: 'form-control', row: 10 %>
+    
+    <%= f.label :teacher, "講師" %>
+    <%= f.text_field :teacher, class: 'form-control' %>
+    
+    <%= f.label :movie_url, "ライブURL"%>
+    <%= f.text_field :movie_url, class: 'form-control' %>
+    
+    <%= f.label :start_time, "開始日時" %>
+    <%= f.datetime_select :start_time, start_year: now.year, end_year: now.year %><br>
+
+    <%= f.label :end_time, "終了日時" %>
+    <%= f.datetime_select :end_time, start_year: now.year, end_year: now.year %><br><br>
+  
+    <%= f.submit '更新する', class: 'btn btn-primary', data: { disable_with: '更新中・・・'} %>
+  <% end %>
+ </div>
+</div>

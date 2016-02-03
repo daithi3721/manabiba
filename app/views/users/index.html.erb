@@ -1,0 +1,53 @@
+<h1>生徒情報一覧</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_tag users_path, :method => 'get' do %>
+      <div class="input-group">
+      <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "名前検索" %>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <i class='glyphicon glyphicon-search'></i>
+            </button>
+          </span>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+　<h5><%= link_to "新規ユーザー作成", :new_user %></h5>
+　
+<% if @users.present? %>
+  <table class="table table-hover table-bordered table-striped table-responsive">
+      <tr>
+          <th>ユーザーID</th>
+          <th>氏名</th>
+          <th>Email</th>
+          <th>校舎名</th>
+          <th>高校名</th>
+          <th>担当</th>
+          <th>コンサル曜日</th>
+          <th>appear_in</th>
+          <th>操作</th>
+      </tr>
+      <% @users.each do |user| %>
+      <tr>
+          <td style="text-align: center"><%= user.id %></td>
+          <td style="text-align: center"><%= user.name %></td>
+          <td style="text-align: center"><%= user.email %></td>
+          <td style="text-align: center"><%= user.classroom %></td>
+          <td style="text-align: center"><%= user.school %></td>
+          <td style="text-align: center"><%= user.consultant %></td>
+          <td style="text-align: center"><%= user.consulting_day %></td>
+          <td style="text-align: center"><%= user.appear_in %></td>
+          <td>
+            <%= link_to "編集", [:edit, user] %>
+            <%= link_to "削除", user, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+          </td>
+      </tr>
+      <% end %>
+  </table>
+<% else %>
+  <p>生徒情報がありません。</p>
+<% end %>
+    

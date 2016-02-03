@@ -1,0 +1,11 @@
+<ul class="list-inline">
+    <li>
+       <%= form_for(current_user.favoriting_relationships.find_by(favorited_id: lesson.id), html: {id: "unfavorite_form_#{lesson.id}", method: :delete}, remote: true) do |f| %>
+          <%= button_tag :type => "submit", :class => "btn btn-danger btn-xs" do %>
+            <i class="glyphicon glyphicon-heart"></i>
+          <% end %>
+       <% end %>
+    </li>
+    <li><%= lesson.favoriter_users.count %>人がお気に入り</li>
+</ul>
+ 

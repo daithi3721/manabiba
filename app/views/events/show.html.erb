@@ -1,0 +1,62 @@
+<div class="page-header">
+    <h3 style="text-align: center">
+        <%= @event.name %>
+    </h3>
+</div>
+
+  <div class="col-md-6 col-md-offset-3 col-xs-12 flex-col">
+    <% if @event.event_image? %>
+      <div class="thumbnail">
+          <%= image_tag @event.event_image.url, :width => "600", :height => "400" %>
+      </div>
+    <% end %>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            イベント名
+        </div>
+        <div class="panel-body">
+            <%= @event.name %>
+        </div>
+    </div>
+    <div class="panel panel-primary flex-col">
+        <div class="panel-heading">
+            イベント説明
+        </div>
+        <div class="panel-body flex-grow">
+            <%= @event.content %>
+        </div>
+    </div>
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            講師
+        </div>
+        <div class="panel-body">
+            <%= @event.teacher %>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            開催時間
+        </div>
+        <div class="panel-body">
+            <%= @event.start_time.strftime('%Y/%m/%d %H:%M') %> - <%= @event.end_time.strftime('%H:%M') %>
+        </div>
+    </div>
+    
+    <div class='youtube-container'>
+        <% iframe = content_tag(
+            :iframe,
+            '', # empty body
+            width: 300,
+            height: 200,
+            src: "https://www.youtube.com/embed/#{@event.movie_url}?showinfo=0&rel=0",
+            allowfullscreen: true ) %>
+        <%= content_tag(:div, iframe, class: 'youtube-container') %>
+    </div>
+            
+    <% if current_user.admin? %>
+    <%= link_to 'イベント編集', edit_event_path(@event), class: 'btn btn-primary btn-lg btn-block' %>
+    <%= link_to 'イベント削除', event_path(@event), class: 'btn btn-primary btn-lg btn-block', method: :delete, data: { confirm: '本当に削除しますか？'} %>
+    <% end %>
+  </div>

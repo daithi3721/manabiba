@@ -1,0 +1,1 @@
+$(".favorite_form_container_<%= @lesson.id %>").html("<%= escape_javascript(render('users/unfavorite', lesson: @lesson)) %>");

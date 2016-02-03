@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h3 style="text-align: center">過去のイベント一覧</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+      <div class="btn-group">
+        <%= paginate @finished_events %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12"> 
+      <div class="panel">
+        <div class="panel-body">
+          <!--/stories-->
+        <% @finished_events.each do |event| %>
+		      <div class="row">    
+            <div class="col-md-2 col-sm-2 hidden-xs">
+              <%= image_tag event.event_image, :class => "img-circle", :width => "100", :height => "100" %>
+            </div>
+            <div class="col-md-10 col-sm-9">
+              <h3><%= event.name %></h3><br>
+              <div class="row">
+                <div class="col-xs-12">
+                  <p class="hidden-xs"><%= event.content %></p>
+                  <p class="lead"><%= button_to "イベント詳細", event, :class => "btn btn-primary", :method => :get %></p><br>
+                  <ul class="list-inline">
+                    <li><%= event.start_time.strftime('%Y/%m/%d') %></li>
+                    <li><i class="glyphicon glyphicon-comment"></i><%= event.teacher %></li>
+                  </ul>
+                </div>
+                <div class="col-xs-3"></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+        <% end %>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <%= paginate @finished_events %>
+          </div>
+        </div>
+      </div>
+    </div>

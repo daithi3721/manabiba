@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h3 style="text-align: center">
+                イベントルーム
+            </h3>
+        </div>
+        <div class="panel-body">
+            <h3 style="text-align: center">
+              <%= @coming_event.name %>
+            </h3>
+            <h5 style="text-align: center">
+              <%= @coming_event.content %>
+            </h5><br>
+            <ul class="list-inline" style="text-align: center">
+              <li text-align="center">講師：<%= @coming_event.teacher %></li>
+              <li text-align="center">時間：<%= @coming_event.start_time.strftime('%Y/%m/%d %H:%M') %> - <%= @coming_event.end_time.strftime('%H:%M') %></li>
+            </ul>
+            <div class='youtube-container'>
+                            <% iframe = content_tag(
+                                              :iframe,
+                                              '', # empty body
+                                              width: 700,
+                                              height: 500,
+                                              src: "https://www.youtube.com/embed/#{@coming_event.movie_url}?showinfo=0&rel=0",
+                                              allowfullscreen: true ) %>
+                               <%= content_tag(:div, iframe, class: 'youtube-container') %>
+            </div>
+        </div>
+    </div>
+</div>

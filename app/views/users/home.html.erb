@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="panel panel-default">
+	  <div class="panel-body">
+		<h3 style="text-align: center">Profile</h3>
+		<%= image_tag 'classroom.jpg', :size => '330x200' %>
+		<!--<img src="images/project1.jpg" class="img-responsive" />-->
+		<h5 style="text-align: center">ようこそ<%= @user.name %>さん！</h5>
+		<h5 style="text-align: center"><%= link_to "プロフィール表示", @user %> <i class="glyphicon glyphicon-user"></i></h5>
+		<h5 style="text-align: center"><%= link_to "お気に入り一覧", favoritings_path %> <i class="glyphicon glyphicon-star"></i></h5>
+	  </div>
+	</div>
+  </div>
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="panel panel-default">
+	  <div class="panel-body">
+		<h3 style="text-align: center">Consulting</h3>
+		<%= image_tag 'consulting.jpg', :size => '330x200' %>
+	    <!--	<img src="images/consulting.jpg" class="img-responsive" /> -->
+		<h5 style="text-align: center">コンサル: <%= @user.consultant %></h5>
+		<h5 style="text-align: center"><%= link_to "コンサルルーム", @user.appear_in %> <i class="glyphicon glyphicon-home"></i></h5>
+		<h5 style="text-align: center"><%= link_to "コンサルに連絡", "#" %> <i class="glyphicon glyphicon-envelope"></i></h5>
+	  </div>
+	</div>
+  </div>
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="panel panel-default">
+	  <div class="panel-body">
+	    <h3 style="text-align: center">Coaching</h3>
+	    <%= image_tag 'coaching.JPG', :size => '330x200' %>
+		<h5 style="text-align: center"><%= link_to "コーチングルーム", @user.appear_in %> <i class="glyphicon glyphicon-headphones"></i></h5>
+		<h5 style="text-align: center"><%= link_to "コーチング予約", "#" %> <i class="glyphicon glyphicon-map-marker"></i></h5>
+		<h5 style="text-align: center"><%= link_to "コーチング掲示板", "#" %> <i class="glyphicon glyphicon-list-alt"></i></h5>
+	  </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="panel panel-default">
+	  <div class="panel-body">
+	  	<h3 style="text-align: center">Event</h3>
+	  	<%= image_tag 'event.jpg', :size => '330x200' %>
+		<h5 style="text-align: center"><%= link_to "イベント予定一覧", events_path %> <i class="glyphicon glyphicon-search"></i></h5>
+		<h5 style="text-align: center"><%= link_to "イベントルーム", ustream_path %> <i class="glyphicon glyphicon-fire"></i></h5>
+		<h5 style="text-align: center"><%= link_to "過去のイベント一覧", finished_path %> <i class="glyphicon glyphicon-fire"></i></h5>
+	  </div>
+	</div>
+  </div>
+  <div class="col-md-8 col-sm-12 col-xs-12">
+    <div class="panel panel-default">
+	  <div class="panel-body">
+	    <h3 style="text-align: center">coming soon・・・</h3>
+	    <%= link_to image_tag(@coming_event.event_image.url, :size => '715x290'), @coming_event %>
+	  </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h3 class="title">新着授業</h3><hr>
+  <div class="row">
+    <% @new_lessons.each do |new_lesson| %>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body"><%= link_to image_tag(new_lesson.lesson_image.url, :size => "230x200"), new_lesson %></div>
+        <div class="panel-footer"><%= link_to new_lesson.name, new_lesson %></div>
+      </div>
+      <ul class="list-inline">
+        <li><%= new_lesson.created_at.strftime('%Y/%m/%d')%></li>
+        <li><i class="glyphicon glyphicon-user"></i><%= new_lesson.teacher %></li>
+        <li>
+            <div class="favorite_form_container_<%= new_lesson.id %>">
+              <% if current_user.favoriting?(new_lesson) %>
+                <%= render 'users/unfavorite', lesson: new_lesson %>
+              <% else %>
+                <%= render 'users/favorite', lesson: new_lesson %>
+              <% end %>
+            </div>
+        </li>
+      </ul>
+　  </div>
+    <% end %>
+    <div class="col-md-4 col-sm-8 col-xs-12">
+      <%= link_to '新着授業一覧', lessons_path, :class => 'btn btn-primary btn-block' %><br><br>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h3 class="title">人気授業</h3><hr>
+  <div class="row">
+    <% @favorite_lessons.each do |(lesson, count), rank| %>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body"><%= link_to image_tag(lesson.lesson_image.url, :size => "230x200"), lesson %></div>
+        <div class="panel-footer"><%= link_to lesson.name, lesson %></div>
+      </div>
+      <ul class="list-inline">
+        <li><%= lesson.created_at.strftime('%Y/%m/%d')%></li>
+        <li><i class="glyphicon glyphicon-user"></i><%= lesson.teacher %></li>
+        <li>
+          <div class="favorite_form_container_<%= lesson.id %>">
+            <% if current_user.favoriting?(lesson) %>
+              <%= render 'users/unfavorite', lesson: lesson %>
+            <% else %>
+              <%= render 'users/favorite', lesson: lesson %>
+            <% end %>
+          </div>
+        </li>
+      </ul>
+    </div>
+   <% end %>
+  </div>
+</div><br>
+<div class="col-md-4 col-sm-8 col-xs-12">
+  <%= link_to '人気授業一覧', favorite_ranks_path, :class => 'btn btn-primary btn-block' %><br><br>
+</div>
