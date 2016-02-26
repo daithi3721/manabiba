@@ -1,0 +1,36 @@
+<h1>基礎講座情報一覧</h1>
+
+
+
+　<h5><%= link_to "新規基礎講座作成", :new_basis_lesson %></h5>
+　
+<% if @basis_lessons.present? %>
+  <table class="table table-hover table-bordered table-striped table-responsive">
+      <tr>
+          <th>講座名</th>
+          <th>講座番号</th>
+          <th>講座タイトル</th>
+          <th>講師名</th>
+          <th>動画URL</th>
+          <th>提供元</th>
+          <th>処理</th>
+      </tr>
+      <% @basis_lessons.each do |basis_lesson| %>
+      <tr>
+          <td style="text-align: center"><%= basis_lesson.subject %></td>
+          <td style="text-align: center"><%= basis_lesson.number %></td>
+          <td style="text-align: center"><%= basis_lesson.name %></td>
+          <td style="text-align: center"><%= basis_lesson.teacher %></td>
+          <td style="text-align: center"><%= basis_lesson.movie_url %></td>
+          <td style="text-align: center"><%= basis_lesson.school %></td>
+          <td>
+            <%= link_to "編集", [:edit, basis_lesson] %>
+            <%= link_to "削除", basis_lesson, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+          </td>
+      </tr>
+      <% end %>
+  </table>
+<% else %>
+  <p>基礎講座情報がありません。</p>
+<% end %>
+    

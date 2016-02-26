@@ -1,0 +1,38 @@
+<h1>教務レポート作成</h1>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@report) do |f| %>
+        
+          <%= render 'shared/error_messages', object: f.object %>
+          
+          <%= f.label :date, "対応日" %>
+          <%= raw sprintf(f.date_select(:date,
+                  use_month_numbers: true,
+                  default:           Date.today,
+                  date_separator:    '%s'), # 年月日区切りをそれぞれ指定
+              '年 ', '月 ') + '日'%>
+　　　　　
+          <%= f.label :situation, "状況" %>
+          <% options = ["反転授業", "ライブ授業", "web質問対応", "その他の会話"] %>
+          <%= f.select :situation, options, class: 'form-control' %><br><br>
+          
+          <%= f.label :subject, "科目" %>
+          <% options = ["英語", "現代文", "古文", "数学", "社会", "理科"] %>
+          <%= f.select :subject, options, class: 'form-control' %><br><br>
+          
+          <%= f.label :user_id, "生徒ID" %>
+          <%= f.number_field :user_id, class: 'form-control' %><br>
+          
+          <%= f.label :reeport, "レポート" %>
+          <%= f.text_area :reeport, :placeholder => "講師の目から見てコンサルタントに伝えて置くべきことを記入しましょう。", class: 'form-control' %>
+          
+          <%= f.hidden_field :teacher, :value => current_user.name %>
+          <%= f.hidden_field :state, :value => "新規報告" %><br>
+
+          <%= f.submit "新規レポート作成", class: "btn btn-large btn-primary" %>
+          
+        <% end %>
+          
+    </div>
+</div>

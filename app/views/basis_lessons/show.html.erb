@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h3 style="text-align: center">
+                <%= @basis_lesson.name %>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-inline" style="text-align: center">
+              <li><%= @basis_lesson.subject %></li>
+              <li>第<%= @basis_lesson.number %>講</li>
+              <li><i class="glyphicon glyphicon-user"></i><%= @basis_lesson.teacher %></li>
+            </ul>
+            <div class='youtube-container' style="text-align: center">
+                       <% iframe = content_tag(
+                                      :iframe,
+                                      '', # empty body
+                                      width: 960,
+                                      height: 600,
+                                      src: "https://www.youtube.com/embed/#{@basis_lesson.movie_url}?showinfo=0&rel=0",
+                                      allowfullscreen: true ) %>
+                       <%= content_tag(:div, iframe, class: 'youtube-container') %>
+            </div>
+        </div>
+    </div>
+</div>

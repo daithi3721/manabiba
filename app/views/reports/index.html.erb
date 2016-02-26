@@ -1,0 +1,121 @@
+<h1>教務レポート一覧</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= search_form_for @search do |f| %>
+      <div class="input-group">
+         <%= f.search_field :state_cont, class: "form-control", placeholder: "状態検索: 新規報告/方針検討中/解決のいずれかを記入" %>
+           <span class="input-group-btn">
+             <button class="btn btn-default" type="submit">
+               <i class='glyphicon glyphicon-search'></i>
+             </button>
+           </span>
+      </div><br>
+    <% end %>
+     <%= search_form_for @search do |f| %>
+      <div class="input-group">
+         <%= f.search_field :user_name_cont, class: "form-control", placeholder: "生徒名検索" %>
+           <span class="input-group-btn">
+             <button class="btn btn-default" type="submit">
+               <i class='glyphicon glyphicon-search'></i>
+             </button>
+           </span>
+      </div><br>
+    <% end %>
+    <%= search_form_for @search do |f| %>
+      <div class="input-group">
+         <%= f.search_field :user_consultant_cont, class: "form-control", placeholder: "コンサル検索" %>
+         <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <i class='glyphicon glyphicon-search'></i>
+            </button>
+          </span>
+      </div><br>
+    <% end %>
+    <%= search_form_for @search do |f| %>
+      <div class="input-group">
+         <%= f.search_field :teacher_cont, class: "form-control", placeholder: "対応講師検索" %>
+           <span class="input-group-btn">
+             <button class="btn btn-default" type="submit">
+               <i class='glyphicon glyphicon-search'></i>
+             </button>
+           </span>
+      </div>
+    <% end %><br>
+    <%= search_form_for @search do |f| %>
+      <div class="input-group">
+        <%= f.label :date, "対応期間" %>&nbsp;&nbsp;
+        <%= raw sprintf(f.date_select(:date_gteq,
+                  use_month_numbers: true,
+                  default:           Date.today,
+                  date_separator:    '%s'), # 年月日区切りをそれぞれ指定
+              '年 ', '月 ') + '日'%>〜
+        <%= raw sprintf(f.date_select(:date_lteq,
+                  use_month_numbers: true,
+                  default:           Date.today,
+                  date_separator:    '%s'), # 年月日区切りをそれぞれ指定
+              '年 ', '月 ') + '日'%>
+           <span class="input-group-btn">
+             <button class="btn btn-default" type="submit">
+               <i class='glyphicon glyphicon-search'></i>
+             </button>
+           </span>
+      </div><br>
+    <% end %>
+    <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+      <div class="btn-group">
+        <%= paginate @reports %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h5><%= link_to "レポート作成", :new_report %></h5>
+
+<% if @reports.present? %>
+  <table class="table table-hover table-bordered table-striped table-responsive">
+      <tr>
+          <th>状態</th>
+          <th>対応日</th>
+          <th>シチュエーション</th>
+          <th>講師</th>
+          <th>科目</th>
+          <th>生徒ID</th>
+          <th>生徒名</th>
+          <th>担当コンサル</th>
+          <th>レポート</th>
+          <th>操作</th>
+      </tr>
+      <% @reports.each do |report| %>
+        <% if report.date < Date.today && report.answer_report.blank? %>
+          <tr style="background-color: 	MistyRose">
+              <td style="text-align: center"><%= report.state %></td>
+              <td style="text-align: center"><%= report.date %></td>
+              <td style="text-align: center"><%= report.situation %></td>
+              <td style="text-align: center"><%= report.teacher %></td>
+              <td style="text-align: center"><%= report.subject %></td>
+              <td style="text-align: center"><%= report.user_id %></td>
+              <td style="text-align: center"><%= report.user.name %></td>
+              <td style="text-align: center"><%= report.user.consultant %></td>
+              <td style="text-align: center"><%= link_to "詳細", report %>　<%= link_to "編集", [:edit, report] %></td>
+              <td><%= link_to "削除", report, method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+          </tr>
+        <% else %>
+          <tr>
+              <td style="text-align: center"><%= report.state %></td>
+              <td style="text-align: center"><%= report.date %></td>
+              <td style="text-align: center"><%= report.situation %></td>
+              <td style="text-align: center"><%= report.teacher %></td>
+              <td style="text-align: center"><%= report.subject %></td>
+              <td style="text-align: center"><%= report.user_id %></td>
+              <td style="text-align: center"><%= report.user.name %></td>
+              <td style="text-align: center"><%= report.user.consultant %></td>
+              <td style="text-align: center"><%= link_to "詳細", report %>　<%= link_to "編集", [:edit, report] %></td>
+              <td><%= link_to "削除", report, method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+          </tr>
+        <% end %>
+      <% end %>
+  </table>
+<% else %>
+  <p>予約情報がありません。</p>
+<% end %>

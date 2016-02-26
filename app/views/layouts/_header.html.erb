@@ -20,26 +20,20 @@
         <% if logged_in? %>
           <li><%= link_to "ホーム", home_path %></li>
           <li><%= link_to "解説授業", lessons_path %></li>
+          <% unless current_user.classroom=='カンヨビ' %>
+          <li><%= link_to "基礎講座", thumbnails_path %></li>
+          <% end %>
+          
           <% if current_user.admin?  %>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">生徒管理<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "生徒情報一覧", users_path %></li>
-                  <li><%= link_to "新規生徒登録", new_user_path %></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">解説授業管理<b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理機能<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><%= link_to "新規作成", new_lesson_path %></li>
-                <li><%= link_to "解説授業一覧", lessons_path %></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">イベント管理<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "イベント作成", new_event_path %></li>
-                <li><%= link_to "イベント一覧", events_path %></li>
+                <li><%= link_to "基礎授業管理", basis_lessons_path %></li>
+                <li><%= link_to "イベント管理", new_event_path %></li>
+                <li><%= link_to "予約管理", reservations_path %></li>
+                <li><%= link_to "解説授業管理", new_lesson_path %></li>
+                <li><%= link_to "生徒情報管理", users_path %></li>
+                <li><%= link_to "教務レポート管理", reports_path %></li>
               </ul>
             </li>
           <% end %>

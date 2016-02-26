@@ -48,7 +48,7 @@ class LessonsController < ApplicationController
       @lesson.destroy!
       redirect_to :lessons, notice: '削除しました。'
     end
-    
+
     private
     
     def lesson_params

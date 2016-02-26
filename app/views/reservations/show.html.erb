@@ -1,0 +1,77 @@
+  <div class="page-header">
+    <h3 style="text-align: center">
+        予約情報
+    </h3>
+</div>
+  
+  <div class="col-md-6 col-md-offset-3 col-xs-12 flex-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            予約日時
+        </div>
+        <div class="panel-body">
+            <%= @reservation.reception_date %>&nbsp;&nbsp;<%= @reservation.recept %>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            予約者名
+        </div>
+        <div class="panel-body">
+            <%= @reservation.user.name %>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            appear_in
+        </div>
+        <div class="panel-body">
+            <%= @reservation.user.appear_in %>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            予約区分
+        </div>
+        <div class="panel-body">
+            <%= @reservation.subject %>&nbsp;&nbsp;<%= @reservation.question_type %>
+        </div>
+    </div>
+    
+    <% if @reservation.question_image? %>
+      <div class="thumbnail">
+          <%= image_tag @reservation.question_image.url, :width => "600", :height => "400" %>
+      </div>
+    <% end %>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            質問内容
+        </div>
+        <div class="panel-body">
+            <%= @reservation.content %>
+        </div>
+    </div>
+    <% if @reservation.question_report.present? %>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            質問対応者
+        </div>
+        <div class="panel-body">
+            <%= @reservation.question_staff %>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            質問レポート
+        </div>
+        <div class="panel-body">
+            <%= @reservation.question_report %>
+        </div>
+    </div>
+    <% end %>
+    <%= link_to '教科選択ページに戻る', subject_select_path, class: 'btn btn-primary btn-lg btn-block' %>
+    <% if current_user.admin || current_user.id = @reservation.user_id? %>
+    <%= link_to '編集/レポート作成', edit_reservation_path(@reservation), class: 'btn btn-primary btn-lg btn-block' %>
+    <%= link_to '予約情報削除', reservation_path(@reservation), class: 'btn btn-primary btn-lg btn-block', method: :delete, data: { confirm: '本当に削除しますか？'} %>
+    <% end %>
+  </div>

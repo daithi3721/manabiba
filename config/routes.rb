@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'basis_lessons/new'
+
   root to: 'static_pages#guest'
   get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
@@ -9,6 +11,25 @@ Rails.application.routes.draw do
   get 'favoritings', to: 'users#favoritings'
   get 'favorite_ranks', to: 'lessons#favorite_ranks'
   get 'finished', to: 'events#finished'
+  get 'thumbnails', to: 'basis_lessons#thumbnails'
+  get 'grammer', to: 'basis_lessons#grammer'
+  get 'reading', to: 'basis_lessons#reading'
+  get 'japanese', to: 'basis_lessons#japanese'
+  get 'kobun', to: 'basis_lessons#kobun'
+  get 'mathematics_1a', to: 'basis_lessons#mathematics_1a'
+  get 'mathematics_2b', to: 'basis_lessons#mathematics_2b'
+  get 'mathematics_3', to: 'basis_lessons#mathematics_3'
+  get 'physis', to: 'basis_lessons#physis'
+  get 'chemistry', to: 'basis_lessons#chemistry'
+  get 'english_reserved_list', to: 'reservations#english_reserved_list'
+  get 'mathematics_reserved_list', to: 'reservations#mathematics_reserved_list'
+  get 'japanese_reserved_list', to: 'reservations#japanese_reserved_list'
+  get 'kobun_reserved_list', to: 'reservations#kobun_reserved_list'
+  get 'subject_select', to: 'reservations#subject_select'
+  get 'reservations/new/:subject/:reception_date/:recept', to: 'reservations#new', as: :new_reservation
+  resources :reports
+  resources :reservations
+  resources :basis_lessons
   resources :events
   resources :users
   resources :lessons

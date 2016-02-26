@@ -1,4 +1,18 @@
 ja:
+
+  activerecord:
+    models:
+      reservation:
+    attributes:
+      reservation:
+        recept: "予約時間"
+    errors:
+      models:
+        reservation:
+          attributes:
+            recept:
+              blank: "が登録されていません。"
+  
   date:
     formats:
       default: "%Y/%m/%d"

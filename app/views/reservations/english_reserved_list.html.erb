@@ -1,0 +1,21 @@
+<h2 style="text-align:center">英語ウェブ質問予約</h2><br>
+<div class="container">
+  <% @reservations.each do |reserv| %>
+  <div class="row">
+    <h2 style="text-align:center"><%= reserv[:date].strftime('%m月%d日') %></h2><hr>
+    <div class="row">
+      <% reserv[:reservations_per_day].each do |reservation| %>
+        <% if reservation.new_record? %>
+          <div class="col-lg-3 col-sm-3 col-6">
+            <%= link_to image_tag("//placehold.it/300x150/2255EE/FFF/?text=#{reservation.recept}", :class => "thumbnail img-responsive"), new_reservation_path(subject: reservation.subject, recept: reservation.recept, reception_date: reservation.reception_date) %>
+          </div>
+        <% else %>
+          <div class="col-lg-3 col-sm-3 col-6">
+            <%= image_tag("//placehold.it/300x150/992233/FFF/?text=#{reservation.recept}", :class => "thumbnail img-responsive") %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -3,10 +3,10 @@
     <div class="panel panel-default">
 	  <div class="panel-body">
 		<h3 style="text-align: center">Profile</h3>
-		<%= image_tag 'classroom.jpg', :size => '330x200' %>
+		<%= image_tag 'profile.png', :size => '330x200' %>
 		<!--<img src="images/project1.jpg" class="img-responsive" />-->
 		<h5 style="text-align: center">ようこそ<%= @user.name %>さん！</h5>
-		<h5 style="text-align: center"><%= link_to "プロフィール表示", @user %> <i class="glyphicon glyphicon-user"></i></h5>
+		<h5 style="text-align: center"><%= link_to "プロフィール・WEB質問予約状況", @user %> <i class="glyphicon glyphicon-user"></i></h5>
 		<h5 style="text-align: center"><%= link_to "お気に入り一覧", favoritings_path %> <i class="glyphicon glyphicon-star"></i></h5>
 	  </div>
 	</div>
@@ -15,22 +15,22 @@
     <div class="panel panel-default">
 	  <div class="panel-body">
 		<h3 style="text-align: center">Consulting</h3>
-		<%= image_tag 'consulting.jpg', :size => '330x200' %>
+		<%= image_tag 'consulting.png', :size => '330x200' %>
 	    <!--	<img src="images/consulting.jpg" class="img-responsive" /> -->
 		<h5 style="text-align: center">コンサル: <%= @user.consultant %></h5>
 		<h5 style="text-align: center"><%= link_to "コンサルルーム", @user.appear_in %> <i class="glyphicon glyphicon-home"></i></h5>
-		<h5 style="text-align: center"><%= link_to "コンサルに連絡", "#" %> <i class="glyphicon glyphicon-envelope"></i></h5>
+		<h5 style="text-align: center"><%= link_to "コンサルに連絡", 'https://manabiba.slack.com/' %> <i class="glyphicon glyphicon-envelope"></i></h5>
 	  </div>
 	</div>
   </div>
   <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="panel panel-default">
 	  <div class="panel-body">
-	    <h3 style="text-align: center">Coaching</h3>
-	    <%= image_tag 'coaching.JPG', :size => '330x200' %>
-		<h5 style="text-align: center"><%= link_to "コーチングルーム", @user.appear_in %> <i class="glyphicon glyphicon-headphones"></i></h5>
-		<h5 style="text-align: center"><%= link_to "コーチング予約", "#" %> <i class="glyphicon glyphicon-map-marker"></i></h5>
-		<h5 style="text-align: center"><%= link_to "コーチング掲示板", "#" %> <i class="glyphicon glyphicon-list-alt"></i></h5>
+	    <h3 style="text-align: center">WEB質問対応</h3>
+	    <%= image_tag 'web_question.png', :size => '330x200' %>
+		<h5 style="text-align: center"><%= link_to "質問ルーム", @user.appear_in %> <i class="glyphicon glyphicon-headphones"></i></h5>
+		<h5 style="text-align: center"><%= link_to "WEB質問予約", subject_select_path %> <i class="glyphicon glyphicon-map-marker"></i></h5>
+		<h5 style="text-align: center"><%= link_to "質問掲示板", 'https://manabiba.slack.com/' %> <i class="glyphicon glyphicon-list-alt"></i></h5>
 	  </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
     <div class="panel panel-default">
 	  <div class="panel-body">
 	  	<h3 style="text-align: center">Event</h3>
-	  	<%= image_tag 'event.jpg', :size => '330x200' %>
+	  	<%= image_tag 'event.png', :size => '330x200' %>
 		<h5 style="text-align: center"><%= link_to "イベント予定一覧", events_path %> <i class="glyphicon glyphicon-search"></i></h5>
 		<h5 style="text-align: center"><%= link_to "イベントルーム", ustream_path %> <i class="glyphicon glyphicon-fire"></i></h5>
 		<h5 style="text-align: center"><%= link_to "過去のイベント一覧", finished_path %> <i class="glyphicon glyphicon-fire"></i></h5>
@@ -81,13 +81,13 @@
             </div>
         </li>
       </ul>
-　  </div>
+　   </div>
     <% end %>
-    <div class="col-md-4 col-sm-8 col-xs-12">
-      <%= link_to '新着授業一覧', lessons_path, :class => 'btn btn-primary btn-block' %><br><br>
-    </div>
   </div>
 </div>
+<div class="col-md-4 col-sm-8 col-xs-12">
+  <%= link_to '新着授業一覧', lessons_path, :class => 'btn btn-primary btn-block' %>
+</div><br><br><br>
 
 <div class="container">
   <h3 class="title">人気授業</h3><hr>

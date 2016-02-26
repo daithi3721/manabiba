@@ -1,0 +1,33 @@
+  <div class="page-header">
+    <h3 style="text-align: center">
+        レポート詳細
+    </h3>
+</div>
+  
+  <div class="col-md-6 col-md-offset-3 col-xs-12 flex-col">
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            教務レポート
+        </div>
+        <div class="panel-body">
+            <%= @report.reeport %>
+        </div>
+    </div>
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            解決策
+        </div>
+        <div class="panel-body">
+           <% if @report.answer_report.present? %>
+            <%= @report.answer_report %>
+           <% else %>
+            解決策レポートはまだ提出されていません。
+           <% end %>
+        </div>
+    </div>
+ 
+    <%= link_to 'レポート一覧に戻る', reports_path, class: 'btn btn-primary btn-lg btn-block' %>
+    
+  </div>

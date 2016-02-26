@@ -1,0 +1,46 @@
+<h1>ユーザー登録</h1>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@user) do |f| %>
+        
+          <%= render 'shared/error_messages', object: f.object %>
+        
+          <%= f.label :name, "氏名" %>
+          <%= f.text_field :name, class: 'form-control' %>
+          
+          <%= f.label :email, "email" %>
+          <%= f.text_field :email, class: 'form-control' %>
+          
+          <%= f.label :school, "高校名" %>
+          <%= f.text_field :school, class: 'form-control' %>
+         
+          <%= f.label :classroom, "校舎名" %>
+          <% options = ["カンヨビ", "上本町校舎", "北千里校舎", "豊中校舎", "茨木校舎", "光前寺校舎", "塚口校舎", "豊津校舎"] %>
+          <%= f.select :classroom, options, class: 'form-control' %><br><br>
+  
+          <%= f.label :consultant, "担当コンサルタント" %>
+          <%= f.text_field :consultant, class: 'form-control' %>
+          
+          <%= f.label :consulting_day %>
+          <% options = ["月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"] %>
+          <%= f.select :consulting_day, options, class: 'form-control' %><br><br>
+          
+          <%= f.label :appear_in, "appear-in"%>
+          <%= f.text_field :appear_in, class: 'form-control' %>
+          
+          <%= f.label :password, "パスワード※半角英数字６文字以上" %>
+          <%= f.password_field :password, class: 'form-control' %>
+          
+          <%= f.label :password_confirmation, "確認用" %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+          
+          <%= f.label :admin, "管理者権限" %>
+          <label><%= f.radio_button :admin, "true" %>yes</label><br><br>
+          <label><%= f.radio_button :admin, "false" %>no</label>
+          <%= f.submit "アカウント作成", class: "btn btn-large btn-primary" %>
+          
+        <% end %>
+          
+    </div>
+</div>

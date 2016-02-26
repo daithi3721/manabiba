@@ -1,0 +1,119 @@
+<h1>予約情報一覧</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= search_form_for @search do |f| %>
+      <div class="input-group">
+         <%= f.search_field :situation_cont, class: "form-control", placeholder: "状態検索: 未対応/質問対応済み/方針検討中/解決のいずれか記入" %>
+           <span class="input-group-btn">
+             <button class="btn btn-default" type="submit">
+               <i class='glyphicon glyphicon-search'></i>
+             </button>
+           </span>
+      </div><br>
+    <% end %>
+     <%= search_form_for @search do |f| %>
+      <div class="input-group">
+         <%= f.search_field :user_name_cont, class: "form-control", placeholder: "生徒名検索" %>
+           <span class="input-group-btn">
+             <button class="btn btn-default" type="submit">
+               <i class='glyphicon glyphicon-search'></i>
+             </button>
+           </span>
+      </div><br>
+    <% end %>
+    <%= search_form_for @search do |f| %>
+      <div class="input-group">
+         <%= f.search_field :user_consultant_cont, class: "form-control", placeholder: "コンサル検索" %>
+         <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <i class='glyphicon glyphicon-search'></i>
+            </button>
+          </span>
+      </div><br>
+    <% end %>
+    <%= search_form_for @search do |f| %>
+      <div class="input-group">
+         <%= f.search_field :question_staff_cont, class: "form-control", placeholder: "対応担当者検索" %>
+           <span class="input-group-btn">
+             <button class="btn btn-default" type="submit">
+               <i class='glyphicon glyphicon-search'></i>
+             </button>
+           </span>
+      </div>
+    <% end %><br>
+    <%= search_form_for @search do |f| %>
+      <div class="input-group">
+        <%= f.label :reception_date, "予約期間" %>&nbsp;&nbsp;
+        <%= raw sprintf(f.date_select(:reception_date_gteq,
+                  use_month_numbers: true,
+                  default:           Date.today,
+                  date_separator:    '%s'), # 年月日区切りをそれぞれ指定
+              '年 ', '月 ') + '日'%>〜
+        <%= raw sprintf(f.date_select(:reception_date_lteq,
+                  use_month_numbers: true,
+                  default:           Date.today,
+                  date_separator:    '%s'), # 年月日区切りをそれぞれ指定
+              '年 ', '月 ') + '日'%>
+           <span class="input-group-btn">
+             <button class="btn btn-default" type="submit">
+               <i class='glyphicon glyphicon-search'></i>
+             </button>
+           </span>
+      </div><br>
+    <% end %>
+    <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+      <div class="btn-group">
+        <%= paginate @reservations %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @reservations.present? %>
+  <table class="table table-hover table-bordered table-striped table-responsive">
+      <tr>
+          <th>状態</th>
+          <th>予約日</th>
+          <th>予約時間</th>
+          <th>質問科目</th>
+          <th>質問区分</th>
+          <th>ユーザーID</th>
+          <th>氏名</th>
+          <th>対応担当者</th>
+          <th>担当コンサル</th>
+          <th>操作</th>
+      </tr>
+      <% @reservations.each do |reservation| %>
+        <% if reservation.reception_date < Date.today && reservation.question_report.blank? %>
+          <tr style="background-color: 	MistyRose">
+              <td style="text-align: center"><%= reservation.situation %></td>
+              <td style="text-align: center"><%= reservation.reception_date %></td>
+              <td style="text-align: center"><%= reservation.recept %></td>
+              <td style="text-align: center"><%= reservation.subject %></td>
+              <td style="text-align: center"><%= reservation.question_type %></td>
+              <td style="text-align: center"><%= reservation.user_id %></td>
+              <td style="text-align: center"><%= reservation.user.name %></td>
+              <td style="text-align: center"><%= reservation.question_staff %></td>
+              <td style="text-align: center"><%= reservation.user.consultant %></td>
+              <td><%= link_to "詳細", reservation %></td>
+          </tr>
+        <% else %>
+          <tr>
+              <td style="text-align: center"><%= reservation.situation %></td>
+              <td style="text-align: center"><%= reservation.reception_date %></td>
+              <td style="text-align: center"><%= reservation.recept %></td>
+              <td style="text-align: center"><%= reservation.subject %></td>
+              <td style="text-align: center"><%= reservation.question_type %></td>
+              <td style="text-align: center"><%= reservation.user_id %></td>
+              <td style="text-align: center"><%= reservation.user.name %></td>
+              <td style="text-align: center"><%= reservation.question_staff %></td>
+              <td style="text-align: center"><%= reservation.user.consultant %></td>
+              <td><%= link_to "詳細", reservation %></td>
+          </tr>
+        <% end %>
+      <% end %>
+  </table>
+<% else %>
+  <p>予約情報がありません。</p>
+<% end %>

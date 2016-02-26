@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
                                        foreign_key: "favoriter_id",
                                        dependent: :destroy
     has_many :favoriting_lessons, through: :favoriting_relationships, source: :favorited
+    has_many :reservations
+    
+    has_many :reports
     
     before_save { self.email = email.downcase }
     validates :name, presence: true, length: { maximum: 50 }

@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @reservations = @user.reservations.where('reception_date >= ?', Date.today).order(reception_date: :desc)
   end
   
   def new
