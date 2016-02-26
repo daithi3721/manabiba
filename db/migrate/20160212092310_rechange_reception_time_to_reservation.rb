@@ -1,9 +1,9 @@
 class RechangeReceptionTimeToReservation < ActiveRecord::Migration
   def up
-    change_column :Reservations, :reception_time, :time
+    change_column :reservations, :reception_time, :time
   end
 
   def down
-    change_column :Reservations, :reception_time, :string, null: false
+    change_column :reservations, :reception_time, :string, null: false
   end
 end
