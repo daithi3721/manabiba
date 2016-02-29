@@ -7,9 +7,8 @@ class EventImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
   # storage :fog
-  process :resize_to_fit => [200, 200]
+  
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -18,6 +17,16 @@ class EventImageUploader < CarrierWave::Uploader::Base
   
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+  
+  if Rails.env.production?
+    include Cloudinary::CarrierWave
+  else
+    storage :file
+  end
+
+  def public_id
+    model.id
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

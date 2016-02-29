@@ -45,14 +45,15 @@
 	  </div>
 	</div>
   </div>
-  <div class="col-md-8 col-sm-12 col-xs-12">
+  <div class="col-md-4 col-sm-6 col-xs-6">
     <div class="panel panel-default">
 	  <div class="panel-body">
 	    <h3 style="text-align: center">coming soon・・・</h3>
 	    <% if @coming_event.present? %>
-	      <%= link_to image_tag(@coming_event.event_image.url, :size => '715x290'), @coming_event %>
+	      <%= link_to image_tag(@coming_event.event_image.url, :size => '330x200'), @coming_event %><br><br>
+	      <h5 style="text-align: center"><%= link_to @coming_event.name, @coming_event %> <i class="glyphicon glyphicon-fire"></i></h5>
 	    <% else %>
-	     <div style="text-align: center">予定しているイベントはありません。</div>
+	     <div style="text-align: center">予定のイベントはありません。</div>
 	    <% end %>
 	  </div>
     </div>

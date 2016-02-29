@@ -70,8 +70,8 @@
     </div>
     <% end %>
     <%= link_to '教科選択ページに戻る', subject_select_path, class: 'btn btn-primary btn-lg btn-block' %>
-    <% if current_user.admin || current_user.id = @reservation.user_id? %>
+    <% if current_user.admin? %>
     <%= link_to '編集/レポート作成', edit_reservation_path(@reservation), class: 'btn btn-primary btn-lg btn-block' %>
-    <%= link_to '予約情報削除', reservation_path(@reservation), class: 'btn btn-primary btn-lg btn-block', method: :delete, data: { confirm: '本当に削除しますか？'} %>
     <% end %>
+    <%= link_to '予約情報削除', reservation_path(@reservation), class: 'btn btn-primary btn-lg btn-block', method: :delete, data: { confirm: '本当に削除しますか？'} %>
   </div>

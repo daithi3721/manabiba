@@ -27,7 +27,7 @@
           <%= f.select :consulting_day, options, class: 'form-control' %><br><br>
           
           <%= f.label :appear_in, "appear-in"%>
-          <%= f.text_field :appear_in, class: 'form-control' %>
+          <%= f.text_field :appear_in, class: 'form-control', value: 'https://appear.in/' %>
           
           <%= f.label :password, "パスワード※半角英数字６文字以上" %>
           <%= f.password_field :password, class: 'form-control' %>
@@ -35,9 +35,9 @@
           <%= f.label :password_confirmation, "確認用" %>
           <%= f.password_field :password_confirmation, class: 'form-control' %>
           
-          <%= f.label :admin, "管理者権限" %>
-          <label><%= f.radio_button :admin, "true" %>yes</label><br><br>
-          <label><%= f.radio_button :admin, "false" %>no</label>
+          <%= f.label :admin, "管理者権限" %>&nbsp;&nbsp;
+          <label><%= f.radio_button :admin, "true" %>yes</label>
+          <label><%= f.radio_button :admin, "false" %>no</label><br><br>
           <%= f.submit "アカウント作成", class: "btn btn-large btn-primary" %>
           
         <% end %>

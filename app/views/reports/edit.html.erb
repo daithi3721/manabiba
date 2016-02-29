@@ -8,7 +8,7 @@
           
           <%= f.label :state, "状態" %>
           <% options = ["新規報告", "方針検討中", "解決"] %>
-          <%= f.select :state, options, class: 'form-control' %>
+          <%= f.select :state, options, class: 'form-control' %>&nbsp;&nbsp;&nbsp;&nbsp;
           
           <%= f.label :date, "対応日" %>
           <%= raw sprintf(f.date_select(:date,
@@ -19,14 +19,14 @@
 　　　　　
           <%= f.label :situation, "シチュエーション" %>
           <% options = ["反転授業", "ライブ授業", "web質問対応", "その他の会話"] %>
-          <%= f.select :situation, options, class: 'form-control' %><br><br>
+          <%= f.select :situation, options, class: 'form-control' %>&nbsp;&nbsp;
           
           <%= f.label :subject, "科目" %>
           <% options = ["英語", "現代文", "古文", "数学", "社会", "理科"] %>
-          <%= f.select :subject, options, class: 'form-control' %>&nbsp;&nbsp;&nbsp;
+          <%= f.select :subject, options, class: 'form-control' %><br><br>
           
           <%= f.label :user_id, "生徒ID" %>
-          <%= f.number_field :user_id, class: 'form-control' %><br><br>
+          <%= f.number_field :user_id, class: 'form-control' %>
           
           <%= f.label :reeport, "レポート" %>
           <%= f.text_area :reeport, :placeholder => "講師の目から見てコンサルタントに伝えて置くべきことを記入しましょう。", class: 'form-control' %>

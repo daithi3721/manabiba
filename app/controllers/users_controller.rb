@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    @appear_in = "https://appear.in/"
   end
   
   def create
@@ -43,7 +44,8 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to :users, notice: "会員を削除しました。"
+    flash[:success] = "ユーザー情報を削除しました。"
+    redirect_to :users
   end
   
   def home
