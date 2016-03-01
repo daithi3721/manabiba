@@ -15,7 +15,7 @@ class BasisLessonsController < ApplicationController
     end
     
     def index
-       @basis_lessons = BasisLesson.order(subject: :asc, number: :desc, name: :desc)
+       @basis_lessons = BasisLesson.order(subject: :asc, number: :asc, name: :asc)
       # @basis_lessons = BasisLesson.search(params[:search])
     end
     
