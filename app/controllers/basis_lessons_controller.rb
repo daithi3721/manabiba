@@ -47,39 +47,39 @@ class BasisLessonsController < ApplicationController
     end
     
     def grammer
-      @basis_lessons = BasisLesson.where(subject: '７日間 英文法 基礎完成講座').order("number")
+      @basis_lessons = BasisLesson.where(subject: '７日間 英文法 基礎完成講座').order(number: :asc, name: :asc)
     end
     
     def reading
-      @basis_lessons = BasisLesson.where(subject: '７日間 英文読解 基礎完成講座').order("number")
+      @basis_lessons = BasisLesson.where(subject: '７日間 英文読解 基礎完成講座').order(number: :asc, name: :asc)
     end
     
     def japanese
-      @basis_lessons = BasisLesson.where(subject: '基礎現代文').order("number")
+      @basis_lessons = BasisLesson.where(subject: '基礎現代文').order(number: :asc, name: :asc)
     end
     
     def kobun
-      @basis_lessons = BasisLesson.where(subject: 'たった6時間で古典文法をマスターする方法').order("number")
+      @basis_lessons = BasisLesson.where(subject: 'たった6時間で古典文法をマスターする方法').order(number: :asc, name: :asc)
     end
     
     def mathematics_1a
-      @basis_lessons = BasisLesson.where(subject: '基礎数学1A').order("number")
+      @basis_lessons = BasisLesson.where(subject: '基礎数学1A').order(number: :asc, name: :asc)
     end
     
     def mathematics_2b
-      @basis_lessons = BasisLesson.where(subject: '基礎数学2B').order("number")
+      @basis_lessons = BasisLesson.where(subject: '基礎数学2B').order(number: :asc, name: :asc)
     end
     
     def mathematics_3
-      @basis_lessons = BasisLesson.where(subject: '基礎数学3').order("number")
+      @basis_lessons = BasisLesson.where(subject: '基礎数学3').order(number: :asc, name: :asc)
     end
     
     def physis
-      @basis_lessons = BasisLesson.where(subject: '基礎物理').order("number")
+      @basis_lessons = BasisLesson.where(subject: '基礎物理').order(number: :asc, name: :asc)
     end
     
     def chemistry
-      @basis_lessons = BasisLesson.where(subject: '基礎化学').order("number")
+      @basis_lessons = BasisLesson.where(subject: '基礎化学').order(number: :asc, name: :asc)
     end
     
     private
