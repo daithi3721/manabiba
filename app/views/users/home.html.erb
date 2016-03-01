@@ -18,8 +18,8 @@
 		<%= image_tag 'consulting.png', :size => '330x200' %>
 	    <!--	<img src="images/consulting.jpg" class="img-responsive" /> -->
 		<h5 style="text-align: center">コンサル: <%= @user.consultant %></h5>
-		<h5 style="text-align: center"><%= link_to "コンサルルーム", @user.appear_in %> <i class="glyphicon glyphicon-home"></i></h5>
-		<h5 style="text-align: center"><%= link_to "コンサルに連絡", 'https://manabiba.slack.com/' %> <i class="glyphicon glyphicon-envelope"></i></h5>
+		<h5 style="text-align: center"><%= link_to "コンサルルーム", @user.appear_in, target: "_blank" %> <i class="glyphicon glyphicon-home"></i></h5>
+		<h5 style="text-align: center"><%= link_to "コンサルに連絡", 'https://manabiba.slack.com/', target: "_blank" %> <i class="glyphicon glyphicon-envelope"></i></h5>
 	  </div>
 	</div>
   </div>
@@ -28,9 +28,9 @@
 	  <div class="panel-body">
 	    <h3 style="text-align: center">WEB質問対応</h3>
 	    <%= image_tag 'web_question.png', :size => '330x200' %>
-		<h5 style="text-align: center"><%= link_to "質問ルーム", @user.appear_in %> <i class="glyphicon glyphicon-headphones"></i></h5>
+		<h5 style="text-align: center"><%= link_to "質問ルーム", @user.appear_in, target: "_blank" %> <i class="glyphicon glyphicon-headphones"></i></h5>
 		<h5 style="text-align: center"><%= link_to "WEB質問予約", subject_select_path %> <i class="glyphicon glyphicon-map-marker"></i></h5>
-		<h5 style="text-align: center"><%= link_to "質問掲示板", 'https://manabiba.slack.com/' %> <i class="glyphicon glyphicon-list-alt"></i></h5>
+		<h5 style="text-align: center"><%= link_to "質問掲示板", 'https://manabiba.slack.com/', target: "_blank" %> <i class="glyphicon glyphicon-list-alt"></i></h5>
 	  </div>
     </div>
   </div>
@@ -45,13 +45,14 @@
 	  </div>
 	</div>
   </div>
-  <div class="col-md-4 col-sm-6 col-xs-6">
+  <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="panel panel-default">
 	  <div class="panel-body">
 	    <h3 style="text-align: center">coming soon・・・</h3>
 	    <% if @coming_event.present? %>
-	      <%= link_to image_tag(@coming_event.event_image.url, :size => '330x200'), @coming_event %><br><br>
+	      <%= link_to image_tag(@coming_event.event_image.url, :size => '330x200'), @coming_event %>
 	      <h5 style="text-align: center"><%= link_to @coming_event.name, @coming_event %> <i class="glyphicon glyphicon-fire"></i></h5>
+	      <h5 style="text-align: center">講師： <%= @coming_event.teacher %>先生 <i class="glyphicon glyphicon-user"></i> <%= @coming_event.start_time.strftime('%m/%d %H:%M') %>〜<i class="glyphicon glyphicon-time"></i></h5>
 	    <% else %>
 	     <div style="text-align: center">予定のイベントはありません。</div>
 	    <% end %>

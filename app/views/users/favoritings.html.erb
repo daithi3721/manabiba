@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>お気に入り授業一覧</h1>
+  <h3 style="text-align:center">お気に入り授業一覧</h3>
 </div>
 
 <div class="row">
@@ -25,14 +25,14 @@
           <!--/stories-->
         <% @lessons.each do |lesson| %>
 		      <div class="row">    
-            <div class="col-md-2 col-sm-3 text-center">
+            <div class="col-md-2 col-sm-3 text-center hidden-xs">
               <%= image_tag lesson.lesson_image, :class => "img-circle", :width => "100", :height => "100" %>
             </div>
             <div class="col-md-10 col-sm-9">
-              <h3><%= lesson.name %></h3><br>
+              <h3><%= lesson.name %></h3>
               <div class="row">
-                <div class="col-xs-9">
-                  <p><%= lesson.description %></p>
+                <div class="col-xs-12">
+                  <p class="hidden-xs"><%= lesson.description %></p>
                   <p class="lead"><%= button_to "授業を見る", lesson, :class => "btn btn-primary", :method => :get %></p><br>
                   <ul class="list-inline">
                     <li><%= lesson.created_at.strftime('%Y/%m/%d')%></li>
