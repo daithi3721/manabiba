@@ -1,5 +1,5 @@
 class BasisLesson < ActiveRecord::Base
-    validates :subject, preserce: true
+    validates :subject, presence: true
     validates :number, presence: true
     validates :name, presence: true
     validates :teacher, presence: true
